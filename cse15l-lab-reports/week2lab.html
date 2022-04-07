@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 2 Lab</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../master.css">
+    <style>
+        div {
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        p {
+            line-height: calc(100% + 10px);
+        }
+        img {
+            height: 50vh;
+        }
+        code {
+            font-family: Consolas;
+            font-size: 1.3em;
+            background-color: grey;
+            padding: 0px 6px;
+            border-radius: 5px;
+        }
+        li {
+            margin-top: 10px;
+        }
+        span {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h2>Week 2 Lab Report - Connecting to and Using ieng6 ssh at UCSD</h2>
+
+    <div>
+        <h3>1. Installing VSCode</h3>
+        <p>To download Microsoft Visual Studio Code, you can navigate <a href="https://code.visualstudio.com/download" target="_blank">here</a>. It is a free Interactive Development Environment (IDE) and is one of the most widely used ones as well. Be sure to select the appropriate version for your machine! Once installed, you should see a page that looks like this:</p>
+        <img src="images/vscode.png" alt="vscode"/>
+    </div>
+
+    <div>
+        <h3>2. Remotely Connecting</h3>
+        <p>In general, the <code>ssh</code> command is used to securely connect to another computer running either on your local network or outside it. In order to start using the command, you must go to Terminal->New Terminal to open a terminal inside of VSCode. Then, the syntax of the <code>ssh</code> command is as follows: <code>ssh [user]@[server]</code> where <code>user</code> is your username on the computer, and <code>server</code> is the server your are attempting to connect to. On success, you should see a message in your terminal that looks like the following:</p>
+        <img src="images/welcome.png" alt="welcome"/>
+    </div>
+
+    <div>
+        <h3>3. Some Commands</h3>
+        <p>There are many commands that we can use in the terminal, but here are a few notable ones:</p>
+        <ul>
+            <li><code>cd</code> - change directory that your terminal is working from</li>
+            <li><code>ls -[flags]</code> - list all folders and files in the working directory. Optional flags include:
+                <ul>
+                    <li><code>-a</code> - include hidden files and folders</li>
+                    <li><code>-l</code> - long format which includes information such as permissions</li>
+                    <li><code>-t</code> - sort by time and date</li>
+                </ul></li>
+            <li><code>cp [from] [to]</code> - copy (locally) a file from one folder to another</li>
+        </ul>
+    </div>
+
+    <div>
+        <h3>4. Moving Files with scp</h3>
+        <p>The <code>scp</code> command is used to move files from a local machine to a server, hence the 's' indicating <span>secure</span> copy. This is difference from <code>cp</code> because <code>cp</code> is an insecure command just to move files around on your current machine. To use <code>scp</code>, use <code>scp [path to file you want to copy on your machine] [ssh user@destination]:[path]</code>. To copy a file to the home directory on the server for example:</p>
+        <img src="images/scp.png" alt="scp command" style="height: 5vh;"/>
+        <p>You will see 100%, indicating that the command ran successfully.</p>
+    </div>
+
+    <div>
+        <h3>5. Setting an SSH Key</h3>
+        <p>An SSH key is used to create a key, unique to your device, that you can put on the server to allow you to log in without using a password. To create one, use <code>ssh-keygen</code>. Be sure to <strong>not</strong> enter a password when asked for one, just press enter. You can then move the key over with the <code>scp</code> command mentioned previously. Be sure to put it into the <code>authorized_keys</code> folder inside of that home directory on the server. See below for an example:</p>
+        <img src="images/keygen.png" alt="keygen demo">
+    </div>
+
+    <div>
+        <h3>6. Optimizing Remote Running</h3>
+        <p>Let's say you have a <code>.java</code> file that you want to run on a server, but you prefer to make the changes on your machine. It would be a lot to type out the <code>scp</code> command, log into <code>ssh</code>, compile with <code>javac</code>, and run with <code>java</code>. Instead of typing out four separate commands, you can combine them into one. Chain using two ampersands (&&), and any commands you want to run on the server you should put between quotes ("). For example:</p>
+        <img src="images/chaining.png" alt="chaining" style="height: 10vh;">
+    </div>
+
+    <footer>Matthew Vandenberg A16837156 Last Updated 4-5-22</footer>
+</body>
+</html>

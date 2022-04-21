@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../master.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <title>Lab 2 Week 4</title>
+</head>
+<body>
+    <h2>Lab 2 Week 4 - Fixing bugs with GitHub</h2>
+
+    <div>
+        <h3>First Code Change</h3>
+        <img src="images/commit1.png" alt="Commit One">
+        <a href="https://github.com/mv5903/markdown-parser/commit/7dedc2918143f5a9ef609e1095ee60a6488446e8#diff-d902b3a6dba925548b7ea18ffb80dd0c28f1bc45f1d738a5da414273711a4409">Testing File</a>
+        <p>Output:<code>[https://something.com, https://something.com, https://example.com]</code> </p>
+        <p>In this example, since images have a similar format in markdown to that of links, the original program counted it at a link when it should not have. Exclamation points should <strong>not</strong> be included in the list of links that the program finds.</p>
+    </div>
+
+    <div>
+        <h3>Second Code Change</h3>
+        <img src="images/commit2.png" alt="Commit Two">
+        <a href="https://github.com/mv5903/markdown-parser/commit/ecc70388f57e2a105d2a067473e9dc80dd62cfe6#diff-b41609a8ef61f99f33bda72455ac86f1c1ba1123e387b5a4094bda7a155e59b3">Testing File</a>
+        <p>Output: <code>
+            Exception in thread "main" java.lang.StringIndexOutOfBoundsException: begin 0, end -1, length 7<br>
+                at java.base/java.lang.String.checkBoundsBeginEnd(String.java:4601)<br>
+                at java.base/java.lang.String.substring(String.java:2704)<br>
+                at MarkdownParse.getLinks(MarkdownParse.java:19)<br>
+                at MarkdownParse.main(MarkdownParse.java:30)<br>
+        </code></p>
+        <p>For this second example, the program would crash every time a blank file did not contain any links. The program was not correctly written to accept any line of text based on the line-reading imports that it was using. Simply fixing this to <code>java.util.Scanner</code> would make this better.</p>
+    </div>
+
+    <div>
+        <h3>Third Code Change</h3>
+        <img src="images/commit3.png" alt="Commit Three">
+        <a href="https://github.com/mv5903/markdown-parser/commit/ecc70388f57e2a105d2a067473e9dc80dd62cfe6#diff-b41609a8ef61f99f33bda72455ac86f1c1ba1123e387b5a4094bda7a155e59b3">Testing File</a>
+        <p>Output: <code>
+            Exception in thread "main" java.lang.StringIndexOutOfBoundsException: begin 0, end -1, length 14<br>
+                at java.base/java.lang.String.checkBoundsBeginEnd(String.java:4601)<br>
+                at java.base/java.lang.String.substring(String.java:2704)<br>
+                at MarkdownParse.getLinks(MarkdownParse.java:19)<br>
+                at MarkdownParse.main(MarkdownParse.java:30)<br>
+        </code></p>
+        <p>Finally, I believed that a file that did have content inside of it, but did not actually contain any links should have at least gave us a blank list. However, this was a bug that caused the program to crash instead. The program should be able to take any markdown file.</p>
+    </div>
+
+    <footer>Matthew Vandenberg A16837156 Last Updated 4-21-22</footer>
+</body>
+</html>

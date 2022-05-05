@@ -14,53 +14,53 @@
 
     <h4>Streamlining SSH Configuration</h4>
     <div>
-        <p>In order to create my ssh profile file, I simply typed the command <code>nano  ~/.ssh/config</code>, and I pasted in the required code. I then renamed the hostname to ucsd instead of ieng6, which leaves the following:</p>
+        <p>In order to create my ssh profile file, I simply typed the command <code>nano  ~/.ssh/config</code>, and I pasted in the required code. I then renamed the hostname to <code>ucsd</code> instead of <code>ieng6</code>, which leaves the following:</p>
         <img src="images/sshfile.png" alt="SSH Configuration File" style="height:20vh;">
     </div>
     <div>
-        <p>By simply creating this file and saving it in the proper directory, we can easily log in to the ieng6 server by typing <code>ssh ucsd</code>. Recall that I used ucsd as the host name, rather than ieng6.</p>
+        <p>By simply creating this file and saving it in the proper directory, we can easily log in to the UCSD server by typing <code>ssh ucsd</code>. Recall that I used <strong>ucsd</strong> as the host name, rather than ieng6.</p>
         <img src="images/login.png" alt="Login using new hostname" style="height:20vh;">
     </div>
     <div>
-        <p>When we created an ssh host on our computer, we can more quickly move a file from our computer to the ucsd server. For example:</p>
+        <p>When we created an ssh host on our computer, we can more quickly move a file from our computer to the UCSD server. This is much easier than typing out the entire name of [account]@ieng6.ucsd.edu each time.</p>
         <img src="images/scplab3.png" alt="SCP" style="height:20vh;">
     </div>
 
     <h4>Setup Github Access from ieng6</h4>
     <div>
-        <p>Here is where my ssh keys are located:</p>
+        <p>I created a public and private key based on the GitHub tutorial. Here is where my ssh keys are located:</p>
         <section style="display:flex;flex-direction: row;">
             <img src="images/githubpublic.png" alt="Location of public key" style="height: 10vh">
             <img src="images/ucsdpublickey.png" alt="location of public key on ucsd server" style="height: 10vh">
         </section>
     </div>
     <div>
-        <p>Private key location on ucsd machine:</p>
+        <p>Here is where the private key is located on the UCSD machine:</p>
         <img src="images/privatekey.png" alt="location of private key on ucsd server" style="height: 5vh">
     </div>
     <div>
-        <p>Pushing from UCSD machine:</p>
+        <p>Now, when we push from the UCSD machine, it works without error. Here is what that looks like:</p>
         <img src="images/pushfromucsd.png" alt="push from ucsd" style="height: 20vh;">
     </div>
     <div>
-        <p>GitHub page showing the <a href="https://github.com/mv5903/ucsd/commit/d671f8f3334e8c1be7bb340d97984fa6b1bd8532">commit</a>:</p>
+        <p>Here is the GitHub page showing the <a href="https://github.com/mv5903/ucsd/commit/d671f8f3334e8c1be7bb340d97984fa6b1bd8532">commit</a> from the UCSD server. I simply ran the commands on the server and they show on GitHub just as if I had did it on my own machine with GitHub Desktop.</p>
         <img src="images/commitucsd.png" alt="commit from ucsd" style="height: 40vh;">
     </div>
 
     <h4>Copy whole directories with <code>scp -r</code></h4>
 
     <div>
-        <p>Copying the markdown-parse directory over to the ucsd machine can be done as follows. Note that there was a lot of files, but the task does complete successfully (too much to show in screenshots):</p>
+        <p><code>scp</code>, without any argument flags, is used only to copy files from your machine to a machine over ssh. By using the <code>-r</code> flag, we can copy the markdown-parse directory over to the UCSD machine as follows:</p>
         <img src="images/markdownparser.png" alt="" style="height:40vh">
     </div>
 
     <div>
-        <p>Running the JUnit tests on the ucsd machine can be done by running the same commands, but on the ucsd machine instead of our own:</p>
+        <p>Running the JUnit tests on the ucsd machine can be done by running the same commands on our machine, but on the UCSD machine directly:</p>
         <img src="images/runtestsonucsd.png" alt="" style="height:25vh;">
     </div>
 
     <div>
-        <p>We can combine many of these commands to make running JUnit Tests much easier:</p>
+        <p>We can combine these commands to make <code>scp</code> and other java commands in order to quickly manage and run tests on the UCSD machine.</p>
         <img src="images/allcombined.png" alt="" style="height:15vh;">
     </div>
     

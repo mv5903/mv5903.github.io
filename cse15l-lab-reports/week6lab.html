@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 2 Lab</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../master.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Week 6 Lab Report 3 - SSH, ieng6, and scp</h2>
+
+    <h4>Streamlining SSH Configuration</h4>
+    <div>
+        <p>In order to create my ssh profile file, I simply typed the command <code>nano  ~/.ssh/config</code>, and I pasted in the required code. I then renamed the hostname to ucsd instead of ieng6, which leaves the following:</p>
+        <img src="images/sshfile.png" alt="SSH Configuration File" style="height:20vh;">
+    </div>
+    <div>
+        <p>By simply creating this file and saving it in the proper directory, we can easily log in to the ieng6 server by typing <code>ssh ucsd</code>. Recall that I used ucsd as the host name, rather than ieng6.</p>
+        <img src="images/login.png" alt="Login using new hostname" style="height:20vh;">
+    </div>
+    <div>
+        <p>When we created an ssh host on our computer, we can more quickly move a file from our computer to the ucsd server. For example:</p>
+        <img src="images/scplab3.png" alt="SCP" style="height:20vh;">
+    </div>
+
+    <h4>Setup Github Access from ieng6</h4>
+    <div>
+        <p>Here is where my ssh keys are located:</p>
+        <section style="display:flex;flex-direction: row;">
+            <img src="images/githubpublic.png" alt="Location of public key" style="height: 10vh">
+            <img src="images/ucsdpublickey.png" alt="location of public key on ucsd server" style="height: 10vh">
+        </section>
+    </div>
+    <div>
+        <p>Private key location on ucsd machine:</p>
+        <img src="images/privatekey.png" alt="location of private key on ucsd server" style="height: 5vh">
+    </div>
+    <div>
+        <p>Pushing from UCSD machine:</p>
+        <img src="images/pushfromucsd.png" alt="push from ucsd" style="height: 20vh;">
+    </div>
+    <div>
+        <p>GitHub page showing the <a href="https://github.com/mv5903/ucsd/commit/d671f8f3334e8c1be7bb340d97984fa6b1bd8532">commit</a>:</p>
+        <img src="images/commitucsd.png" alt="commit from ucsd" style="height: 40vh;">
+    </div>
+
+    <h4>Copy whole directories with <code>scp -r</code></h4>
+
+    <div>
+        <p>Copying the markdown-parse directory over to the ucsd machine can be done as follows. Note that there was a lot of files, but the task does complete successfully (too much to show in screenshots):</p>
+        <img src="images/markdownparser.png" alt="" style="height:40vh">
+    </div>
+
+    <div>
+        <p>Running the JUnit tests on the ucsd machine can be done by running the same commands, but on the ucsd machine instead of our own:</p>
+        <img src="images/runtestsonucsd.png" alt="" style="height:25vh;">
+    </div>
+
+    <div>
+        <p>We can combine many of these commands to make running JUnit Tests much easier:</p>
+        <img src="images/allcombined.png" alt="" style="height:15vh;">
+    </div>
+    
+    <footer>Matthew Vandenberg A16837156 Last Updated 5-4-22</footer>
+</body>
+</html>

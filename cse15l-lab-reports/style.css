@@ -5,20 +5,37 @@ div {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: rgb(25, 25, 25);
+    padding: 20px;
+    border-radius: 10px;
 }
+
 p {
     line-height: calc(100% + 10px);
 }
 img {
     height: 50vh;
 }
+/* For all <code> */
 code {
-    font-family: Consolas;
-    font-size: 1.3em;
-    background-color: grey;
-    padding: 0px 6px;
+    font-family: MyFancyCustomFont, monospace;
+    font-size: inherit;
+    background-color: black;
+    padding: 0.2em 0.4em;
     border-radius: 5px;
 }
+  
+  /* Code in text */
+  p > code,
+  li > code,
+  dd > code,
+  td > code {
+    background: #ffeff0;
+    word-wrap: break-word;
+    box-decoration-break: clone;
+    padding: .1rem .3rem .2rem;
+    border-radius: .2rem;
+  }
 li {
     margin-top: 10px;
 }

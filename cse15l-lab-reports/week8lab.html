@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 8 Lab</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../master.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Markdown Parse Testing</h2>
+
+    <div>
+        <h4>Repositories</h4>
+        <p>My MarkdownParse repository can be found <a href="https://github.com/mv5903/markdown-parser">here</a>. My group was asked to review <a href="https://github.com/aHewig/markdown-parser">this</a> repository.</p>
+    </div>
+    <br>
+    <hr>
+    <div>
+        <h4>Snippet 1: </h4>
+        <p>We are given the following Markdown code to test against their MarkdownParse.java file:</p>
+        <code>
+            `[a link`](url.com)<br>
+            [another link](`google.com)`<br>
+            [`cod[e`](google.com)<br>
+            [`code]`](ucsd.edu)<br>
+        </code>
+        <p>This is the result we are expecting:</p>
+        <img src="images/MD1.png" alt=""/>
+        <p>Let's create a test for this file in MarkdownParseTest.java:</p>
+        <img src="images/test1code.png" alt="">
+        <p>We are expecting our MarkdownParse.java file to correctly locate one link. Let's run the JUnit Test and see what our result is:</p>
+        <code>
+        java.lang.AssertionError: expected:<[`google.com]> but was:<[url.com, `google.com, google.com, ucsd.edu]><br>
+            at org.junit.Assert.fail(Assert.java:89)<br>
+            at org.junit.Assert.failNotEquals(Assert.java:835)<br>
+            at org.junit.Assert.assertEquals(Assert.java:120)<br>
+            at org.junit.Assert.assertEquals(Assert.java:146)<br>
+            at MarkdownParseTest.getLinksTest(MarkdownParseTest.java:32)<br>
+        </code>
+        <p>This is the result of the test when ran on my own code: </p>
+        <code>
+        java.lang.AssertionError: expected:<[`google.com]> but was:<[url.com, `google.com, google.com, ucsd.edu]><br>
+            at org.junit.Assert.fail(Assert.java:89)<br>
+            at org.junit.Assert.failNotEquals(Assert.java:835)<br>
+            at org.junit.Assert.assertEquals(Assert.java:120)<br>
+            at org.junit.Assert.assertEquals(Assert.java:146)<br>
+            at MarkdownParseTest.getLinksMyTestOne(MarkdownParseTest.java:69)<br>
+        </code>
+        <p>It turns my version of MarkdownParse.java thought some links were links when they were not supposed to be. Looking at my code, it appears that there are other code changes that would have to be made that would be much more involved. The code would have to look for other characters (such as ` and extra []) and make sure it does not include that to be a link. This is one of many tests that will cause me to make more intrusive changes to MarkdownParse.java.</p>
+    </div>
+
+    <div>
+        <h4>Snippet 2: </h4>
+        <p>Next, we are given more Markdown code to test against their MarkdownParse.java tester. Here is the markdown:</p>
+        <code>
+            [a [nested link](a.com)](b.com)<br>
+
+            [a nested parenthesized url](a.com(()))<br>
+
+            [some escaped \[ brackets \]](example.com)<br>
+
+        </code>
+        <p>This is the result we are expecting from their parser:</p>
+        <img src="images/expected2.png" alt="">
+        <p>Let's create another test for this file in MarkdownParseTest.java:</p>
+        <img src="images/test2code.png" width="80%" alt="">
+        <code>
+            java.lang.AssertionError: expected:<[a.com, a.com(()), example.com]> but was:<[a.com, a.com((, example.com]><br>
+                at org.junit.Assert.fail(Assert.java:89)<br>
+                at org.junit.Assert.failNotEquals(Assert.java:835)<br>
+                at org.junit.Assert.assertEquals(Assert.java:120)<br>
+                at org.junit.Assert.assertEquals(Assert.java:146)<br>
+                at MarkdownParseTest.getLinksTestTwo(MarkdownParseTest.java:32)<br>
+        </code>
+        <p>And this is what happens when it is ran on my code:</p>
+        <code>
+            java.lang.AssertionError: expected:<[a.com, a.com(()), example.com]> but was:<[a.com, a.com((, example.com]><br>
+                at org.junit.Assert.fail(Assert.java:89)<br>
+                at org.junit.Assert.failNotEquals(Assert.java:835)<br>
+                at org.junit.Assert.assertEquals(Assert.java:120)<br>
+                at org.junit.Assert.assertEquals(Assert.java:146)<br>
+                at MarkdownParseTest.getLinksMyTestOne(MarkdownParseTest.java:79)<br>
+        </code>
+        <p>It appears that most of the links worked, except for the middle one. This seems like a minor change in code as the expected result is not much different from the actual result. I should probably have the algorithm look for the last parenthesis in the line, rather than the first one that it comes across.</p>
+    </div>
+
+    <div>
+        <h4>Snippet 3: </h4>
+        <p>Here's the last snippet of markdown code that we will put up against their tester: </p>
+        <p>This is the result we are expecting from their parser:</p>
+        <code>
+            [this title text is really long and takes up more than <br>
+            one line<br>
+            <br>
+            and has some line breaks](<br>
+                https://www.twitter.com<br>
+            )<br>
+            <br>
+            [this title text is really long and takes up more than <br>
+            one line](<br>
+            https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule<br>
+            )<br>
+            <br>
+            <br>
+            [this link doesn't have a closing parenthesis](github.com<br>
+            <br>
+            And there's still some more text after that.<br>
+            <br>
+            [this link doesn't have a closing parenthesis for a while](https://cse.ucsd.edu/<br>
+            <br>
+            <br>
+            <br>
+            )<br>
+            <br>
+            And then there's more text<br>
+        </code>
+        <p>Let's go ahead and create our final test for this file:</p>
+        <img src="images/test3code.png" width="80%" alt="">
+        <code>
+            java.lang.AssertionError: expected:<[https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule]> but was:<[<br>
+                https://www.twitter.com<br>
+            , <br>
+            https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule<br>
+            , github.com<br>
+            <br>
+            And there's still some more text after that.<br>
+            <br>
+            [this link doesn't have a closing parenthesis for a while](https://cse.ucsd.edu/<br>
+            <br>
+            <br>
+            <br>
+            ]><br>
+                    at org.junit.Assert.fail(Assert.java:89)<br>
+                    at org.junit.Assert.failNotEquals(Assert.java:835)<br>
+                    at org.junit.Assert.assertEquals(Assert.java:120)<br>
+                    at org.junit.Assert.assertEquals(Assert.java:146)<br>
+                    at MarkdownParseTest.getLinksTestThree(MarkdownParseTest.java:45)<br>
+        </code>
+        <p>And this is what happens when it is ran on my code:</p>
+        <code>
+            java.lang.AssertionError: expected:<[https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule]> but was:<[]><br>
+                at org.junit.Assert.fail(Assert.java:89)<br>
+                at org.junit.Assert.failNotEquals(Assert.java:835)<br>
+                at org.junit.Assert.assertEquals(Assert.java:120)<br>
+                at org.junit.Assert.assertEquals(Assert.java:146)<br>
+                at MarkdownParseTest.getLinksMyTestOne(MarkdownParseTest.java:89)<br>
+        </code>
+        <p>This is one major issue that I discovered with my Markdown Parser. I need to account for links taking up multiple lines, which I did not originally consider. This would require a lot of rewriting.</p>
+    </div>
+    <br>
+    <hr>
+    <footer>Matthew Vandenberg A16837156 Last Updated 5-21-22</footer>
+</body>
+</html>
